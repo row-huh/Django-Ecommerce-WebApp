@@ -7,9 +7,19 @@ class User(AbstractUser):
 
 
 class Listing(models.Model):
+    class Categories(models.TextChoices):
+        TOYS = 'TO', 'Toys'
+        HOME = 'HO', 'Home'
+    
     title = models.TextField(max_length=64, blank=False)
     description = models.TextField(max_length=2000, blank=False)
     imageURL = models.TextField(max_length=64, blank=True)
-    categories = models.TextChoices("toys", "fashion")
-    # bid
+    
+    
+
+    categories = models.CharField(
+        max_length=2,
+        choices=Categories.choices,
+        default=Categories.TOYS,
+    )
     
