@@ -72,5 +72,14 @@ def register(request):
 
 @login_required
 def create(request):
-    form = ListingForm()
-    return render(request, "auctions/create.html", {"form" : form})
+    if request.method=="POST":
+        newListing = Listing(
+            title=request.POST["title"],
+            description=request.POST["description"],
+            categorie=request.POST["categories"],
+            imageURL=request.POST["imageURL"]
+        )
+        index(request)
+    else:
+        form = ListingForm()
+        return render(request, "auctions/create.html", {"form" : form})
