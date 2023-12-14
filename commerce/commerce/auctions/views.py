@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from forms import ListingForm
+from .forms import ListingForm
 
 
 from .models import User, Listing
@@ -68,6 +69,18 @@ def register(request):
         return render(request, "auctions/register.html")
 
 
+
+@login_required
 def create(request):
-    form = ListingForm()
-    return render(request, "create.html", {"form" : form})
+    if request.method=="POST":
+        newListing = Listing(
+            title=request.POST["title"],
+            description=request.POST["description"],
+            categories=request.POST["categories"],
+            imageURL=request.POST["imageURL"]
+        )
+        newListing.save()
+        return index(request)
+    else:
+        form = ListingForm()
+        return render(request, "auctions/create.html", {"form" : form})
