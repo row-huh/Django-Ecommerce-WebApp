@@ -13,4 +13,3 @@ class Listing(models.Model):
     categories = models.TextChoices("toys", "fashion")
     # bid
     
-    
