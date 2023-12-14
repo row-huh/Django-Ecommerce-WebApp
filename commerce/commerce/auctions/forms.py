@@ -8,4 +8,4 @@ class ListingForm(ModelForm):
     ], required=False)
     class Meta:
         model = Listing
-        fields = ['title', 'description', 'categories']
+        fields = ['title', 'description', 'categories', 'imageURL']
