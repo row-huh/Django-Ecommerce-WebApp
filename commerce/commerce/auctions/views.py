@@ -73,4 +73,4 @@ def register(request):
 @login_required
 def create(request):
     form = ListingForm()
-    return render(request, "create.html", {"form" : form})
+    return render(request, "auctions/create.html", {"form" : form})
