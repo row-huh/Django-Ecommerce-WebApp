@@ -84,3 +84,14 @@ def create(request):
     else:
         form = ListingForm()
         return render(request, "auctions/create.html", {"form" : form})
+    
+    
+
+
+def loadListing(request, title):
+    titles = [listing.title for listing in Listing.objects.all()]
+    if (title in titles):
+        return HttpResponse("success")
+    else :
+        return HttpResponse("nah, man this sucks")
+    
