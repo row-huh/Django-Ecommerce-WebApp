@@ -11,7 +11,7 @@ class Listing(models.Model):
         TOYS = 'TO', 'Toys'
         HOME = 'HO', 'Home'
     
-    title = models.TextField(max_length=64, blank=False)
+    title = models.TextField(max_length=64, blank=False, unique=True)
     description = models.TextField(max_length=2000, blank=False)
     imageURL = models.TextField(max_length=64, blank=True)
     

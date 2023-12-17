@@ -91,7 +91,8 @@ def create(request):
 def loadListing(request, title):
     titles = [listing.title for listing in Listing.objects.all()]
     if (title in titles):
-        return HttpResponse("success")
+        listing = Listing.objects.get(title=title)
+        return render(request, "auctions/listing.html",  {"listing" : listing} )
     else :
-        return HttpResponse("nah, man this sucks")
+        return HttpResponse("Page not found")
     
