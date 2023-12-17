@@ -94,5 +94,5 @@ def loadListing(request, title):
         listing = Listing.objects.get(title=title)
         return render(request, "auctions/listing.html",  {"listing" : listing} )
     else :
-        return HttpResponse("Page not found")
+        return render(request, "auctions/404.html")
     
