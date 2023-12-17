@@ -5,9 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import ListingForm
-
-
-from .models import User, Listing
+from .models import User, Listing, Comment
 
 
 def index(request):
@@ -92,7 +90,9 @@ def loadListing(request, title):
     titles = [listing.title for listing in Listing.objects.all()]
     if (title in titles):
         listing = Listing.objects.get(title=title)
-        return render(request, "auctions/listing.html",  {"listing" : listing} )
+        comments = Comment.objects.get(listing=listing)
+        comments = [comment.context for comment in comments]
+        return render(request, "auctions/listing.html",  {"listing" : listing, "comments" : comments } )
     else :
         return render(request, "auctions/404.html")
     

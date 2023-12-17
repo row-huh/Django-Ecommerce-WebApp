@@ -15,7 +15,6 @@ class Listing(models.Model):
     description = models.TextField(max_length=2000, blank=False)
     imageURL = models.TextField(max_length=64, blank=True)
     
-    
 
     categories = models.CharField(
         max_length=2,
@@ -23,3 +22,7 @@ class Listing(models.Model):
         default=Categories.TOYS,
     )
     
+    
+class Comment(models.Model):
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    context = models.TextField(max_length=500, blank=True)
